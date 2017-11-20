@@ -38,6 +38,26 @@ Having dragged some prefab controls, you should have a useable menu:
 
 ![ViveMenuImg](Assets/ViveMenuToolkit/Docs/usablemenu.png)
 
+**Moving menus** 
+
+The BlankViveMenu has a bar along the top of the menu that can be used to drag and drop using the laser. The is using the DragDrop component and can be added to any button and used to move menus.
+
+**Creating a controller menu**
+
+There are two ways of controlling menu items: 
+- Using the laser:
+
+In laser mode, you select controls by pointing the laser at controls and pressing the trigger to interact with them.
+- Using the controller:
+
+In controller mode, you scroll through the items by clicking the pad up and down, and interact with them using the trigger. In this mode the laser will be ignored by the menu.
+
+To create a controller menu, drag and drop the ControllerMenu prefab from the prefabs folder onto a controller (under the CameraRig):
+
+![ViveMenuImg](Assets/ViveMenuToolkit/Docs/controllerMenu.png)
+
+You can change control modes in the ViveMenu component ControlMode dropdown. If you choose to control a menu that is not a child of a controller, you will need to specify a controller in the Controller field of ViveMenu.cs, which will be used to navigate the menu.
+
 **Creating more submenus** 
 
 Note: The toolkit relies on a parent Menu object (the BlankViveMenu, if using the prefab menu), and multiple child canvases when using menu navigation.
@@ -48,27 +68,16 @@ The easiest way to create more submenus is to press Ctrl+D while MainMenu is hig
 
 To navigate between menus, attach the NavigationButton script to a button and specify a TargetMenu. See the NavigationButton.cs notes below.
 
-**Control Modes**
+**Using the toolkit with existing projects**
 
-- Laser mode:
-
-In laser mode, you select controls by pointing the laser at controls and pressing the trigger to interact with them. 
-
-- Controller mode: 
-
-In controller mode, you scroll through the items by clicking the pad up and down, and interact with them using the trigger. In this mode the laser will be ignored by the menu.
-
-**Settings overview**
-
-Change the laser pointer options using the ViveUILaserPointer component on the controllers. You can disable the laser, set the laser to only be visible when pointing at a menu, and change the laser characteristics.
-
-Change the menu settings using the ViveMenu component attached to the parent menu. You can set the menu control mode there.
+See [using the toolkit in existing projects](Assets/ViveMenuToolkit/Docs/ExistingProjects.md).
 
 **Prefabs**
 
 - CameraRig - A camera rig with all the required settings and components, including a VRInputModule and controllers with the ViveUILaserPointer component.
 - BlankViveMenu - A ViveMenu canvas with one submenu and an example button, onto which prefab controls can be dropped. By default this is set to be controlled by the laser.
 - Button/Dropdown/Checkbox/Slider - Normal unity UI controls, styled in the project theme. Drop these controls onto a blank menu.
+- VRInputModule - a gameObject with the LaserPointerInputModule and EventSystem component, required if you are [importing the toolkit from an existing project](Assets/ViveMenuToolkit/Docs/ExistingProjects.md).
 
 # Scripts
 These are the main scripts included in the project. They are already attached to the relevant prefabs, so you will only need to use them if you are customising menus heavily or changing functionality of the project.
@@ -91,6 +100,11 @@ Unity Editor Fields:
 - LaserThickness: Thickness of the laser pointer.
 - LaserAlwaysOn: If true, the laser will always be emitted. If false, the laser will only emitted when it’s pointing at a ViveMenu.
 - DisableLaser: If true, it will completely disable the laser for this controller. This may be necessary when the controller is being used for a ControllerMenu, and you don’t want the laser.
+
+Public methods: 
+
+- void Show(bool show) : Initialises and sets the menu visible or invisible.
+- void SetCurrentMenu(Canvas newCanvas) : Used by the NavigationButton.cs script to switch the current menu.
 
 **DragDrop.cs**
 
