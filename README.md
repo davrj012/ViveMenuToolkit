@@ -91,6 +91,11 @@ Unity Editor Fields:
 - Controller - Only used if the controller is set to ControlMode = Controller, and specifies which controller will be used to control - menu navigation.
 - Camera  - the camera rig. Note: this is required, if you are not using the prefab camera rig then make sure this is specified.
 
+Public methods: 
+
+- void Show(bool show) : Initialises and sets the menu visible or invisible.
+- void SetCurrentMenu(Canvas newCanvas) : Used by the NavigationButton.cs script to switch the current menu.
+
 **ViveUILaserPointer.cs**
 
 This is attached to the vive controller, and emits a laser that can be used to interact with UI selectables.
@@ -100,11 +105,6 @@ Unity Editor Fields:
 - LaserThickness: Thickness of the laser pointer.
 - LaserAlwaysOn: If true, the laser will always be emitted. If false, the laser will only emitted when it’s pointing at a ViveMenu.
 - DisableLaser: If true, it will completely disable the laser for this controller. This may be necessary when the controller is being used for a ControllerMenu, and you don’t want the laser.
-
-Public methods: 
-
-- void Show(bool show) : Initialises and sets the menu visible or invisible.
-- void SetCurrentMenu(Canvas newCanvas) : Used by the NavigationButton.cs script to switch the current menu.
 
 **DragDrop.cs**
 
